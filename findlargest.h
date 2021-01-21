@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "processfile.h"
 
 /* Citation: Code adapted from Example:
 * Getting File and Directory Meta-Data
@@ -61,5 +62,6 @@ int findLargest(void){
   #undef PREFIX
   #undef SUFFIX
   printf("Now processing the choosen file named %s\n", entryName);
+  createDir();
   return 1;
 }

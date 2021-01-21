@@ -1,4 +1,11 @@
+#include <dirent.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include "mainmenu.h"
 #include "submenu.h"
 #include "findsmallest.h"
