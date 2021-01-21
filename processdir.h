@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "createlist.h"
+#include "filemaker.h"
 
 /*
 * takes a file name as filePath
@@ -53,9 +54,9 @@ void createDir(char* filePath){
   //free(dirName);
 
   // get a linked list of movies from filePath
-  printf("%s\n", filePath);
   // Process file and print message
   struct movie* list = processFile(filePath);
+  makeFile(dirName);
 }
 
 // end the condition for compilation of this header file
