@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "processdir.h"
 
 /* Citation: Code adapted from Example:
 * Getting File and Directory Meta-Data
@@ -42,6 +43,7 @@ int findPrefix(void){
       closedir(currDir);
       free(userPrefix);
       printf("Now processing the choosen file named %s\n", entryName);
+      createDir(entryName);
       return 1;
     }
   }
