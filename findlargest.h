@@ -18,7 +18,7 @@
 * print file with prefix movies_
 * with largest size
 */
-void findLargest(void){
+int findLargest(void){
   // looking for file with prefix movies_
   #define PREFIX "movies_"
   // looking for file with suffix .csv
@@ -61,4 +61,5 @@ void findLargest(void){
   #undef PREFIX
   #undef SUFFIX
   printf("Now processing the choosen file named %s\n", entryName);
+  return 1;
 }

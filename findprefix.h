@@ -17,9 +17,13 @@
 /*
 * Print the name of the file or directory in the current directory that was modified last among all files or directories that have the prefix student
 */
-void findPrefix(void){
+int findPrefix(void){
   // get prefix from user
-  #define PREFIX
+  char *userPrefix;
+  userPrefix = malloc(sizeof(char));
+  printf("Enter the complete filename: ");
+  scanf("%s", userPrefix);
+
   // Open the current directory
   DIR* currDir = opendir(".");
   struct dirent *aDir;
@@ -29,15 +33,21 @@ void findPrefix(void){
   // Go through all the entries
   while((aDir = readdir(currDir)) != NULL){
 
-    if(strncmp(PREFIX, aDir->d_name, strlen(PREFIX)) == 0){
+    if(strncmp(userPrefix, aDir->d_name, strlen(userPrefix)) == 0){
       // Get meta-data for the current entry
       stat(aDir->d_name, &dirStat);
-
-      printf("%s  %u\n", aDir->d_name, dirStat.st_mode);
-      
+      memset(entryName, '\0', sizeof(entryName));
+      strcpy(entryName, aDir->d_name);
+      // Close the directory
+      closedir(currDir);
+      free(userPrefix);
+      printf("Now processing the choosen file named %s\n", entryName);
+      return 1;
     }
   }
-  // Close the directory
+  // when file not found
+  printf("the file %s was not found. Try again\n", userPrefix);
   closedir(currDir);
-  #undef PREFIX
+  free(userPrefix);
+  return 0;
 }

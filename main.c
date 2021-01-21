@@ -15,15 +15,19 @@ int main(void) {
         // Process Choice (1-3)
         if (choice == 1)
         {
-            int subchoice = subMenu();
+          int subchoice = 0;
+          while(subchoice == 0){
+            subchoice = subMenu();
             if (subchoice == 1){
-              findLargest();
-            } else if (subchoice == 2){
-              findSmallest();
-            } else{
-              printf("name file option\n");
-              findPrefix();
+              subchoice = findLargest();
+              break;
+            } else if (subchoice == 2) {
+              subchoice = findSmallest();
+              break;
+            } else if (subchoice == 3) {
+              subchoice = findPrefix();
             }
+          } 
         }
         // Repeat Prompt After Processing
         choice = mainMenu();

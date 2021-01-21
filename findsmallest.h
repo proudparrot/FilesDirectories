@@ -17,7 +17,7 @@
 * print file with prefix movies_
 * with smallest size
 */
-void findSmallest(void){
+int findSmallest(void){
   // looking for file with prefix movies_
   #define PREFIX "movies_"
   // looking for file with suffix .csv
@@ -56,4 +56,5 @@ void findSmallest(void){
   #undef PREFIX
   #undef SUFFIX
   printf("Now processing the choosen file named %s\n", entryName);
+  return 1;
 }
