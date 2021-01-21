@@ -3,6 +3,7 @@
 #include "submenu.h"
 #include "findsmallest.h"
 #include "findlargest.h"
+#include "findprefix.h"
 
 int main(void) {
   // Display Prompt and get input
@@ -21,6 +22,7 @@ int main(void) {
               findSmallest();
             } else{
               printf("name file option\n");
+              findPrefix();
             }
         }
         // Repeat Prompt After Processing
