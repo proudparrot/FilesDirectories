@@ -13,6 +13,7 @@ void choices(void)
     printf("1. Select file to process\n");
     printf("2. Exit the program\n");
     printf("\n");
+    return;
 }
 
 /* Process user's choice input */

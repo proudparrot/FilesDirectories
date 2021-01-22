@@ -8,7 +8,7 @@
 */
 
 // global variable to store number of lines
-int totalLines;
+//int totalLines;
 
 /* struct for movie information */
 struct movie
@@ -69,7 +69,7 @@ struct movie* processFile(char* filePath)
     size_t len = 0;
     size_t nread;
     char* token;
-    int tally = 0;
+    //int tally = 0;
 
     // The head of the linked list
     struct movie* head = NULL;
@@ -83,7 +83,7 @@ struct movie* processFile(char* filePath)
     while ((nread = getline(&currLine, &len, movieFile)) != -1)
     {
         // Get the number of lines in file
-        tally++;
+        //tally++;
 
         // Get a new movie node corresponding to the current line
         struct movie* newNode = createMovie(currLine);
@@ -106,8 +106,8 @@ struct movie* processFile(char* filePath)
     }
     free(currLine);
     fclose(movieFile);
-    printf("Processed file %s and parsed data for %d movies\n", filePath, tally);
-    totalLines = tally;
+    //printf("Processed file %s and parsed data for %d movies\n", filePath, tally);
+    //totalLines = tally;
     return head;
 }
 

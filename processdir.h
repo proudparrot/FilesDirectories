@@ -20,39 +20,24 @@
 */
 
 
-
-
 // create new directory
 void createDir(char* filePath){
   // constant directory prefix
-  char* temp;
-  int len;
-  temp = malloc(sizeof(char));
-  strcpy(temp,"sharmabh.movies.");
-  len = strlen(temp);
-  char onid[len + 1];
-  strcpy(onid, temp);
-  free(temp);
+  char* onid = "sharmabh.movies.";
+
+  //to store directory name
+  char* dirName;
+  dirName = malloc(25);
+  strcpy(dirName, onid);
 
   // to store directory extension
-  temp = malloc(sizeof(char));
+  char dirExt[6];
   // generate a random number for suffix
   int num = 0+random( )%99999;
   // convert int to str and store in dirExt
-  sprintf(temp, "%d", num);
-  len = strlen(temp);
-  char dirExt[len+1];
-  strcpy(dirExt, temp);
-  free(temp);
+  sprintf(dirExt, "%d", num);
+  strcat(dirName, dirExt);
 
-  // to store directory name
-  temp = malloc(sizeof(char));
-  temp = strcat(onid, dirExt);
-  len = strlen(temp);
-  char dirName[len+1];
-  strcpy(dirName, temp);
-
-  
   
   // create directory and print message
   mkdir(dirName, 0750);
@@ -62,6 +47,8 @@ void createDir(char* filePath){
   // Process file and print message
   struct movie* list = processFile(filePath);
   makeFile(dirName, list);
+  free(dirName);
+  return;
 }
 
 // end the condition for compilation of this header file

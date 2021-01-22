@@ -15,6 +15,7 @@ void subchoices(void)
     printf("Enter 2 to pick the smallest file\n");
     printf("Enter 3 to specify the name of a file\n");
     //printf("\n");
+    return;
 }
 
 /* Process user's choice input */

@@ -7,42 +7,38 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void addFile(struct movie* list){
-  printf("%s\n", list->year);
-  return;
-}
+/*
+* function makeFile takes directory name and a linked list structure
+* adds file to directory with directory name based on year data in linked list
+*/
 
 void makeFile(char* dir, struct movie* list){
 
   // Process through all in list
   while (list !=NULL){
 
-    //to temporarily store string
-    char* temp_str = malloc(sizeof(char));
-    int str_len;
-
+    char fileName[10];
     //make fileName using list->year
     char* filePrefix = list->year;
     char* fileSuffix = "txt";
-    sprintf(temp_str, "%s.%s", filePrefix, fileSuffix);
-    str_len = strlen(temp_str);
-    char fileName[str_len + 1];
-    strcpy(fileName, temp_str);
-    free(temp_str);
+    sprintf(fileName, "%s.%s", filePrefix, fileSuffix);
 
     // Create filePath
-    temp_str = malloc(sizeof(char));
-    sprintf(temp_str,"%s/%s", dir, fileName);
-    str_len = strlen(temp_str);
-    char filePath[str_len + 1];
-    strcpy(filePath, temp_str);
-    free(temp_str);
+    char filePath[35];
+    sprintf(filePath,"%s/%s", dir, fileName);
+    
 
     // create file in directory
-    open(filePath, O_RDWR | O_CREAT | O_APPEND, 0640);
+    // Citation: example of writing to a file and reading from it
+    // Citation: CS344 W21 Mod3 Files -> Reading and Writing Files
+    int fd;
+    fd = open(filePath, O_RDWR | O_CREAT | O_APPEND, 0640);
+    char* movieTitle = list->title;
+    write(fd, strcat(movieTitle,"\n"), strlen(movieTitle));
+    close(fd);
 
     //on to next item in list
     list = list->next;
   }
-  
+  return;
 }
