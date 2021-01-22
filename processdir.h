@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <time.h>
 #include "createlist.h"
 #include "filemaker.h"
 
@@ -33,6 +34,8 @@ void createDir(char* filePath){
   // to store directory extension
   char dirExt[6];
   // generate a random number for suffix
+  // Citation: https://www.geeksforgeeks.org/rand-and-srand-in-ccpp/
+  srandom(time(0));
   int num = 0+random( )%99999;
   // convert int to str and store in dirExt
   sprintf(dirExt, "%d", num);
