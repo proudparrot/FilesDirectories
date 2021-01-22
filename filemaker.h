@@ -7,41 +7,42 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void createFilename(void){
+void addFile(struct movie* list){
+  printf("%s\n", list->year);
   return;
 }
 
-void makeFile(char* dir){
-  // Open the new directory passed in dir
-  // Citation: CS344 W21 Module3 Directories Example1
-  DIR* newDir = opendir(dir);
-  struct dirent *nDir;
-  
-  // Add new file to new directory
-  // Citation: CS344 W21 Module3 Files Example1
-  int file_descriptor;
-	char* newFilePath = "YYYY.txt";
+void makeFile(char* dir, struct movie* list){
 
-  // flags: the arguments are OR-ed togther
-  // O_RDWR reading and writing
-  // O_CREAT create an empty file if the file doesn't exist
-  // O_APPEND append to end of file
-  // mode:
-  // 0640 Owner can read and write the file and group has read only
-	file_descriptor = open(newFilePath, O_RDWR | O_CREAT | O_APPEND, 0640);
-	if (file_descriptor == -1){
-		printf("open() failed on \"%s\"\n", newFilePath);
-		perror("Error");
-		exit(1);
-	}
-	
-	printf("file_descriptor = %d\n", file_descriptor);
-	
-  // Go through all the entries
-  while((nDir = readdir(newDir)) != NULL){
-    printf("%s  %lu\n", nDir->d_name, nDir->d_ino);    
+  // Process through all in list
+  while (list !=NULL){
+
+    //to temporarily store string
+    char* temp_str = malloc(sizeof(char));
+    int str_len;
+
+    //make fileName using list->year
+    char* filePrefix = list->year;
+    char* fileSuffix = "txt";
+    sprintf(temp_str, "%s.%s", filePrefix, fileSuffix);
+    str_len = strlen(temp_str);
+    char fileName[str_len + 1];
+    strcpy(fileName, temp_str);
+    free(temp_str);
+
+    // Create filePath
+    temp_str = malloc(sizeof(char));
+    sprintf(temp_str,"%s/%s", dir, fileName);
+    str_len = strlen(temp_str);
+    char filePath[str_len + 1];
+    strcpy(filePath, temp_str);
+    free(temp_str);
+
+    // create file in directory
+    open(filePath, O_RDWR | O_CREAT | O_APPEND, 0640);
+
+    //on to next item in list
+    list = list->next;
   }
-  // Close the directory
-  closedir(newDir);
-  return;
+  
 }

@@ -1,4 +1,4 @@
-// make sure header files are not compiled twic
+// make sure header files are not compiled twice
 #ifndef processdir
 #define processdir
 
@@ -25,38 +25,43 @@
 // create new directory
 void createDir(char* filePath){
   // constant directory prefix
-  char* onid;
-  onid = malloc(sizeof(char));
-  strcpy(onid,"sharmabh.movies.");
-  
+  char* temp;
+  int len;
+  temp = malloc(sizeof(char));
+  strcpy(temp,"sharmabh.movies.");
+  len = strlen(temp);
+  char onid[len + 1];
+  strcpy(onid, temp);
+  free(temp);
+
   // to store directory extension
-  char* dirExt;
-  dirExt = malloc(sizeof(char));
-
-  // to store directory name
-  char* dirName;
-  dirName = malloc(sizeof(char));
-
+  temp = malloc(sizeof(char));
   // generate a random number for suffix
   int num = 0+random( )%99999;
-
   // convert int to str and store in dirExt
-  sprintf(dirExt, "%d", num);
-  dirName = strcat(onid, dirExt);
+  sprintf(temp, "%d", num);
+  len = strlen(temp);
+  char dirExt[len+1];
+  strcpy(dirExt, temp);
+  free(temp);
+
+  // to store directory name
+  temp = malloc(sizeof(char));
+  temp = strcat(onid, dirExt);
+  len = strlen(temp);
+  char dirName[len+1];
+  strcpy(dirName, temp);
+
+  
   
   // create directory and print message
   mkdir(dirName, 0750);
   printf("Created directory with name %s\n", dirName);
 
-  // purge malloc memory
-  //free(onid);
-  //free(dirExt);
-  //free(dirName);
-
   // get a linked list of movies from filePath
   // Process file and print message
   struct movie* list = processFile(filePath);
-  makeFile(dirName);
+  makeFile(dirName, list);
 }
 
 // end the condition for compilation of this header file
